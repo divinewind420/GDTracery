@@ -1,8 +1,8 @@
 class_name Tracery
-extends Reference
+extends RefCounted
 		
 		
-class Modifiers extends Reference:
+class Modifiers extends RefCounted:
 	
 	
 	static func _is_consonant( character : String ) -> bool:
@@ -137,10 +137,12 @@ class UniversalModifiers extends Modifiers:
 				
 				
 # Main grammar
-class Grammar extends Reference:
+class Grammar extends RefCounted:
 	
 	
-	var rng : RandomNumberGenerator = null setget set_rng, get_rng # The random number generator
+	# divinewind420 8/26/2024
+	# Since standard random being used no need to create get/set
+	#var rng : RandomNumberGenerator = null: get = get_rng, set = set_rng # The random number generator
 	
 	var _modifier_lookup : Dictionary = {} # Modifier function table
 	var _rules : Dictionary = {} # The rules
@@ -159,10 +161,14 @@ class Grammar extends Reference:
 		_save_symbol_regex.compile( "\\[.+?\\]" )
 		
 		# Default random number generator
-		rng = RandomNumberGenerator.new()
+		# divinewind420 8/26/2024
+		# Since rng not used here, commenting out
+		#rng = RandomNumberGenerator.new()
 		
 		# Randomize seed
-		rng.randomize()
+		# divinewind420 8/26/2024
+		# Since Godot 4 you typically don't need randomize now.
+		#rng.randomize()
 		
 		# Populate the rules list
 		_rules = rules.duplicate( true )
@@ -177,18 +183,24 @@ class Grammar extends Reference:
 			_modifier_lookup[ k ] = modifiers[ k ]
 			
 			
-	func set_rng( rng : RandomNumberGenerator ) -> void:
-		rng = rng
+	# divinewind420 8/26/2024
+	# Since standard rng is being used, no need to get/set
+	#func set_rng( rng : RandomNumberGenerator ) -> void:
+	#	rng = rng
 		
-		
-	func get_rng() -> RandomNumberGenerator:
-		return rng
+	# divinewind420 8/26/2024
+	# Since standard rng is being used, no need to get/set		
+	#func get_rng() -> RandomNumberGenerator:
+		#return rng
 		
 		
 	func flatten( rule : String ) -> String:
 		var expansion_matches = _expansion_regex.search_all( rule )
+		# divinewind420 8/26/2024
+		# Since this is only func using rng creating here
+		var rng = RandomNumberGenerator.new()
 		
-		if expansion_matches.empty():
+		if expansion_matches.is_empty():
 			_resolve_save_symbols( rule )
 			
 		for match_result in expansion_matches:
@@ -260,7 +272,10 @@ class Grammar extends Reference:
 				
 	func _get_modifiers( symbol : String ) -> Array:
 		var modifiers = symbol.replace( "#", "" ).split( "." )
-		modifiers.remove( 0 )
+		#modifiers.remove( 0 )
+		# divinewind420 8/26/2024
+		# Since modifiers' type not defined compiler assiming packed array so using approproate method
+		modifiers.remove_at(0)
 		return modifiers
 		
 		

@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1724697176
+LICENSE.txt::TextFile::-1::1724696977::0::1::::<><>::
+README.md::TextFile::-1::1724696977::0::1::::<><>::
+tracery-logo6.png::CompressedTexture2D::3208673734614237835::1724696977::1724697178::1::::<><>::
+::res://example/::1724696977
+tracery_example.gd::GDScript::-1::1724697153::0::1::::<>Node<>::
+tracery_example.tscn::PackedScene::-1::1724697153::0::1::::<><>::res://example/tracery_example.gd
+::res://scripts/::1724696977
+tracery.gd::GDScript::-1::1724697153::0::1::::Tracery<>RefCounted<>::

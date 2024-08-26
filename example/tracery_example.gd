@@ -4,7 +4,9 @@ extends Node
 func _ready():
 	
 	# Use a custom random number generator
-	var rng = RandomNumberGenerator.new()
+	# divinewind420 8/26/2024
+	# Since rng not used here, commenting out
+	#var rng = RandomNumberGenerator.new()
 	
 	# A simple grammar - or read from a JSON file
 	var grammar_test = Dictionary()
@@ -18,7 +20,9 @@ func _ready():
 	var grammar = Tracery.Grammar.new( grammar_test )
 
 	# Use our custom random number generator
-	grammar.rng = rng
+	# divinewind420 8/26/2024
+	# Since rng not used here, commenting out
+	#grammar.rng = rng
 	
 	# Add the english modifiers
 	grammar.add_modifiers(Tracery.UniversalModifiers.get_modifiers())
